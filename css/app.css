@@ -1,0 +1,235 @@
+html {
+    box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: #ffffff url('../img/geometry2.png'); /* Background pattern from Subtle Patterns */
+    font-family: 'Coda', cursive;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+h1 {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
+}
+
+/*
+ * Styles for the deck of cards
+ */
+
+.deck {
+    width: 660px;
+    min-height: 680px;
+    background: linear-gradient(160deg, #FF5722 0%,#E64A19 100%);
+    padding: 32px;
+    border-radius: 10px;
+    box-shadow: 12px 15px 20px 0 rgba(46, 61, 73, 0.5);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 0 3em;
+    perspective: 1000px;
+}
+
+.deck .card {
+    height: 125px;
+    width: 125px;
+    background: #2e3d49;
+    font-size: 0;
+    color: #ffffff;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.5);
+}
+
+.deck .card.open {
+    transform: rotateY(180deg);
+    background: #FFC107;
+    cursor: default;
+    transform-style: preserve-3d;
+    transition: transform .7s;
+}
+
+.deck .card.show {
+    font-size: 33px;
+}
+
+.deck .card.match {
+    cursor: default;
+    background: #BDBDBD;
+    font-size: 33px;
+}
+
+/*
+ * Styles for the Score Panel
+ */
+
+.score-panel {
+    text-align: left;
+    width: 345px;
+    margin-bottom: 10px;
+}
+
+.score-panel .stars {
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+    margin: 0 5px 0 0;
+}
+
+.score-panel .stars li {
+    list-style: none;
+    display: inline-block;
+}
+
+.score-panel .restart {
+    float: right;
+    cursor: pointer;
+}
+
+/*
+ * All application components are usable across modern desktop, tablet, and phone browsers.
+ * Designing for Different Screens
+ */
+
+@media only screen and (max-width:160px) {
+    h1 {
+        font-size:12px;
+    }    
+    .deck {
+        width:80%;        
+    }
+    .deck .card  {
+        height: 95px;        
+    }
+
+    
+}
+
+@media only screen and (min-width:161px) {
+
+    h1 {
+        font-size:14px;
+    }
+    .deck .card  {
+        height: 95px;        
+    }
+
+    .deck {
+        width:70%;
+    }
+
+    .score-panel {
+        display: flex;
+        justify-content: center;
+    }
+
+}
+
+@media only screen and (min-width:400px) {    
+    .deck .card  {
+        height: 95px;        
+    }
+    .deck {
+        width:70%;
+    }
+    .score-panel {
+        display: flex;
+        justify-content: center;
+    }
+}
+
+
+@media only screen and (min-width:630px) { 
+    .deck .card  {
+        height: 100px;   
+            
+    }
+}
+
+@media only screen and (min-width:700px) { 
+    .deck .card  {
+        width:90px;     
+    }
+}
+
+@media only screen and (min-width:730px) { 
+    .deck .card  {
+        width:110px;     
+    }
+}
+
+@media only screen and (min-width:800px) { 
+    .deck .card  {
+        width:120px;     
+    }
+}
+
+@media only screen and (min-width:950px) { 
+    .deck .card  {
+        width:145px; 
+        height:125px;      
+    }
+}
+
+@media only screen and (min-width:1130px) { 
+    .deck .card  {
+        width:155px; 
+        height:125px;      
+    }
+}
+
+@media only screen and (min-width:1200px) { 
+    .deck .card  {
+        width:165px; 
+        height:125px;      
+    }
+}
+
+@media only screen and (min-width:1280px) { 
+    .deck .card  {
+        width:175px; 
+        height:125px;      
+    }
+}
+
+@media only screen and (min-width:1350px) { 
+    .deck .card  {
+        width:185px; 
+        height:125px;      
+    }
+     h1{
+         font-weight: bold; 
+         font-size:32px;
+     }
+     .score-panel {
+        display: flex;
+        justify-content: space-around;
+    }
+}
+
+  

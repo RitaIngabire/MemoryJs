@@ -1,0 +1,40 @@
+To get started with the Memory Game, 
+it's important to know what you're working with. 
+Here are some very first steps you could take,
+some of which you may have done already but I'm
+n0t sure where you're at.
+
+Read the project description and rubric so 
+you know what criteria your project will need to meet.
+
+Download the starter code to your computer and 
+open it in your code editor.
+
+Run the starter code by opening up index.html in Chrome.
+
+Inspect elements on the page with dev tools and see what 
+you can find out. Look at what classes the cards that are flipped 
+over & showing an icon have applied to them vs the cards that aren't 
+flipped over.
+
+Look at the source code for index.html in your code editor - there 
+are some elements hard coded there including cards.
+
+Look at the source code for app.css in your code editor to see what 
+styles are being applied. Do you have an idea of how you might flip 
+a card over yet?
+
+Look at the source code for app.js in your code editor and see 
+if the comments at the bottom give you an idea. Also there's a 
+shuffle function and a comment above it about displaying cards on 
+the page. However, when you looked at index.html there were cards 
+hard coded there. Does it make sense to leave those cards hard coded 
+in index.html if they are to be shuffled?
+
+If you think about the project all at once, it can seem overwhelming,
+ but the key is to break it down into very small steps. Think about 
+ what's the first small step you can take….you won't be implementing 
+ all the functionality at once, just get one little thing working. If 
+ you make a mistake or need to change it when continuing, that's ok. 
+ After you get one thing working, move on to the next small step you 
+ can take.
