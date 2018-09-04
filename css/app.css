@@ -84,6 +84,43 @@ h1 {
     font-size: 33px;
 }
 
+.deck .card.lock {
+    pointer-events: none;
+}
+
+.modal {
+    height: 45%;
+    width:40%;
+    background-color: white;
+    opacity:1;  
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    box-shadow: #2e3d49 5px,5px;
+    display:none;
+    position:absolute;
+    top:40%; 
+    margin: 0 30%;   
+}
+
+.modal-content{
+    background-color: white;
+    height:80%;
+    width:80%;
+    animation-name: openModal;
+    animation-duration:2s;        
+}
+
+.modal-title .modal-Text1{
+    padding: 5% 15%;  
+}
+
+@keyframes openModal {
+    from{opacity: 0}
+    to{opacity: 1}
+}
+
+
 /*
  * Styles for the Score Panel
  */
@@ -117,119 +154,47 @@ h1 {
  */
 
 @media only screen and (max-width:160px) {
-    h1 {
-        font-size:12px;
-    }    
+    * {
+        font-size:8px;        
+    }  
+
     .deck {
-        width:80%;        
+        width:80%;
     }
-    .deck .card  {
-        height: 95px;        
+    
+    .deck .card  {        
+        width:95vw;  
+        height: 55px;      
     }
 
+    .score-panel {
+        width : 55%;
+        display: flex;
+        flex-direction: column;
+    }    
     
 }
 
-@media only screen and (min-width:161px) {
+@media only screen and (min-width:161px) and (max-width:1000px){
 
-    h1 {
-        font-size:14px;
+    *{
+        font-size:12px;
+        font-weight: 300;
     }
+
     .deck .card  {
-        height: 95px;        
+        height: 95px;     
+        width : 23.5%;   
     }
 
     .deck {
-        width:70%;
+        width:90%;
+        justify-content: space-between;
     }
 
     .score-panel {
-        display: flex;
-        justify-content: center;
+        flex-wrap: wrap;
+        width : 80%;
     }
 
 }
-
-@media only screen and (min-width:400px) {    
-    .deck .card  {
-        height: 95px;        
-    }
-    .deck {
-        width:70%;
-    }
-    .score-panel {
-        display: flex;
-        justify-content: center;
-    }
-}
-
-
-@media only screen and (min-width:630px) { 
-    .deck .card  {
-        height: 100px;   
-            
-    }
-}
-
-@media only screen and (min-width:700px) { 
-    .deck .card  {
-        width:90px;     
-    }
-}
-
-@media only screen and (min-width:730px) { 
-    .deck .card  {
-        width:110px;     
-    }
-}
-
-@media only screen and (min-width:800px) { 
-    .deck .card  {
-        width:120px;     
-    }
-}
-
-@media only screen and (min-width:950px) { 
-    .deck .card  {
-        width:145px; 
-        height:125px;      
-    }
-}
-
-@media only screen and (min-width:1130px) { 
-    .deck .card  {
-        width:155px; 
-        height:125px;      
-    }
-}
-
-@media only screen and (min-width:1200px) { 
-    .deck .card  {
-        width:165px; 
-        height:125px;      
-    }
-}
-
-@media only screen and (min-width:1280px) { 
-    .deck .card  {
-        width:175px; 
-        height:125px;      
-    }
-}
-
-@media only screen and (min-width:1350px) { 
-    .deck .card  {
-        width:185px; 
-        height:125px;      
-    }
-     h1{
-         font-weight: bold; 
-         font-size:32px;
-     }
-     .score-panel {
-        display: flex;
-        justify-content: space-around;
-    }
-}
-
-  

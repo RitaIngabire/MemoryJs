@@ -4,7 +4,8 @@
 
 * [Instructions](#instructions)
 * [Contributing](#contributing)
-* [Interactive Modifications](#Modifications)
+* [Dependencies](#Dependencies)
+* [Game Rules](#Game Rules)
 
 ## Instructions
 
@@ -20,5 +21,19 @@ This repository is the starter code for _all_ Udacity students. Therefore, we mo
 
 For details, check out [CONTRIBUTING.md](CONTRIBUTING.md).
 
-## Interactive Modifications
-All Modifications are done in the app.js file
+## Dependencies
+
+This project requires two dependencies all of which are in the Index.html file 
+
+a) Bootstrap - which is used to generate the congragulations modal
+b) Google fonts - from which we get the displayed icons
+
+## Game Rules
+
+1. The game starts with 16 cards flipped downwards 
+2. Click a pair of cards to flip them open 
+3. These cards are compared :
+        i ) If the cards contain the same icon,the cards stay open and you can then just click another pair of cards to compare them
+        ii) If the cards do not contain the same icon on flipping, the cards are flipped back.
+4. When you click the first card open , a timer starts , it will stop when the cards are successfully matched therby giving you the duration of the game.
+5. The game has a reset button should you wish to reset the game.

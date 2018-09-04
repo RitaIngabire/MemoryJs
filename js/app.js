@@ -1,7 +1,8 @@
+
 /* 1.The game randomly shuffles the cards.
  * A user wins once all cards have successfully been matched * 
  * Shuffle function https://goo.gl/zzMeM1
- */
+*/
 
 function shuffle(array) {
   var currentIndex = array.length, temporaryValue, randomIndex;
@@ -18,7 +19,6 @@ function shuffle(array) {
     array[currentIndex] = array[randomIndex];
     array[randomIndex] = temporaryValue;
   }
-
   return array;
 }
 
@@ -42,19 +42,9 @@ function shuffleNodeList() {
   }
 }
 
-/*
- * 3. Add functions for open , show and match on click 
- *   
- */
-const cards = document.querySelectorAll('.card');
-
-
+// 3. Start the Game by first shuffling the cards 
 function startGame(){
-  shuffleNodeList();    
-}
-
-function displayCard(){
-  this.classList.add('open','show');
+  shuffleNodeList();  
 }
 
 /* 4. A user wins once all 
@@ -67,34 +57,52 @@ function displayCard(){
  *   to match - add class 'match'
 */
 
+var count = 0;
+var intialTime = 0 ;
+var interval = null;
 let cardsPicked = [];
 let cardsMatched = [];
 
+
+/*
+ * 5. Choose , open show and compare cards 
+ */
+const cards = document.querySelectorAll('.card');
+
 function chooseCard(){
+  
+  //if not open - open ,then add a second to compare 
+  //if card is open add a second and compare 
+  
+  this.classList.add("open","show","lock");
+
+  count++;
+
+  if(count === 1){
+    interval = setInterval(startTimer,1000);
+  }
 
   if(cardsPicked.length === 1 ){
-    /*if there's an opencard, this becomes the second card 
-     *1.add it to cardsPicked array 
-     *2.Compare the two cards in the cardsPicked array
-    */             
-    cardsPicked.push(this);  
     
+    cardsPicked.push(this);
+
     //unpack the array for comparison
     let [firstCardPicked,secondCardPicked] = cardsPicked;
 
     //check Cards for equality
     checkCards(firstCardPicked,secondCardPicked);
 
-} else { 
-    //if theres no opencard,then this is the first card clicked 
+    
+  } else {
     cardsPicked.push(this);
+    
   }
-}
-
+} 
 
 function checkCards(firstCardPicked,secondCardPicked){
+  
 
-  if (firstCardPicked.innerHTML === secondCardPicked.innerHTML) {
+    if (firstCardPicked.innerHTML === secondCardPicked.innerHTML) {
 
     firstCardPicked.classList.add('match');
     secondCardPicked.classList.add('match'); 
@@ -105,6 +113,9 @@ function checkCards(firstCardPicked,secondCardPicked){
 
     // Add New successful Moves to total moves 
     totalMoves();
+    
+    //check if the game is over 
+    gameOver();
                    
     
   } else {
@@ -113,8 +124,8 @@ function checkCards(firstCardPicked,secondCardPicked){
       Empty the(cards of open cards and start afresh
     */
         setTimeout( function() {
-          firstCardPicked.classList.remove("open", "show");
-          secondCardPicked.classList.remove("open", "show");            
+          firstCardPicked.classList.remove("open", "show","lock");
+          secondCardPicked.classList.remove("open", "show","lock");            
       }, 400);   
       
       // Add failed moves to total Moves - they also count toward total game moves 
@@ -126,8 +137,37 @@ function checkCards(firstCardPicked,secondCardPicked){
     }
 }
 
-// 5. Game displays the current number of moves a user has made.
+/*
+ * 6. Modal congragulating player 
+ */
+var congratsModal = document.querySelector('.modal');  
+function gameOver(){
+
+  if(cards.length === cardsMatched.length){
+
+    //stop timer when game is done
+    clearInterval(interval);
+
+    //Values to be displayed  
+    let gameTime = document.getElementById('timer').innerHTML;
+    let gameMoves = document.querySelector('.moves').innerHTML;
+    let gameRating  = document.querySelector('.stars').innerHTML;
+    let message = document.querySelector('.modalText1');
+    
+
+   //display modal    
+    congratsModal.style.display = 'block'; 
+    message.innerHTML = 
+    `   You have completed this game in,
+        ${gameTime} and ${gameMoves} moves. 
+        Click the Restart button to start game again.
+        ${gameRating} stars.`;
+  }  
+}
+
+// 7. Game displays the current number of moves a user has made.
 let moves = document.querySelector('.moves').innerHTML;
+
 function totalMoves(){
   //1.moves only counted when a pair of cards is chosen    
   moves = Number(moves)+2; 
@@ -139,7 +179,7 @@ function totalMoves(){
   gameRating(moves);
 }
 
-/* 6.
+/* 8.
  *  A restart button allows the player to reset the game board, 
  *  the timer, and the star rating. 
 */
@@ -149,12 +189,12 @@ restartButton.addEventListener('click', startGameAfresh);
 
 function startGameAfresh(){
     //reset all the variables 
-    cardsOpened = [];
     cardsPicked = [];
+    cardsMatched = [];
        
     //remove additional classes from the cards to flip them back 
     cards.forEach(function(card){
-        card.classList.remove("open", "show","match");
+        card.classList.remove("open", "show","lock","match");
     });
 
     //reset moves to zero 
@@ -165,13 +205,17 @@ function startGameAfresh(){
    totalStars.innerHTML = '<li><i class="fa fa-star"></i></li>'+'<li><i class="fa fa-star"></i></li>'+'<li><i class="fa fa-star"></i></li>';
    
    //Reset timer
-   document.getElementById('timer').innerHTML = '00:00';
-   clearTimeout(interval);
+   document.getElementById('timer').innerHTML =  "0 mins: "+ "0 secs";
+   clearInterval(interval);
+   count = count - count ;
+   intialTime = 0;
 
+   //Hide the congragulations modal 
+   congratsModal.style.display = 'none';
 }
 
 
-/* 7.The game displays a star rating (from 1 to at least 3)
+/* 9.The game displays a star rating (from 1 to at least 3)
 * that reflects the player's performance. 
 * At the beginning of a game, it should display at 
 * least 3 stars. After some number of moves, it should 
@@ -196,43 +240,30 @@ function gameRating(moves){
  
 }
 
-//8. Adding game timer 
+//10. Adding game timer 
 
-var startBtn = document.getElementById('start');
-var stopBtn = document.getElementById('stop');
-var intialtime = 0 ;
-var interval;
-
-function incrementTime(){
-  intialtime++;  
-  var minutes = Math.floor(intialtime/10/60);
-  var seconds = Math.floor(intialtime/10);
-  document.getElementById('timer').innerHTML = minutes + " mins:" + seconds + " secs";
-
+function startTimer(){  
+    intialTime++;
+    var minutes = Math.floor(intialTime/60);
+    var seconds = Math.floor(intialTime%60);      
+    document.getElementById('timer').innerHTML = minutes+ " mins: "+ seconds + " secs";
 }
 
-startBtn.addEventListener('click',function(){
-  interval = setInterval(incrementTime,100); 
-  intialtime = 0 ; 
-})
-
-stopBtn.addEventListener('click',function(){
-   clearInterval(interval);
-   alert('GAME DONE');
-})
+function stopTimer(interval){
+    clearInterval(interval);
+}
 
 
-/* 9. When game is loaded */
+/* 11. When game is loaded  - shuffle cards */
 window.onload = function(){
   startGame();
 }
 
-/*Add click events to cards */
-cards.forEach(function(card){    
-  //start 
-  card.addEventListener('click',displayCard);  
+/*10.Add click events to cards */
+cards.forEach(function(card){      
   card.addEventListener('click',chooseCard);            
 });
+
 
 /* 10.References used to make Project 
 Udacity - Study Jam | Fend - P3 Memory Game
